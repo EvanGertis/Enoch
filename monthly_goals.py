@@ -85,28 +85,27 @@ def prompt_user():
                 try:
                     deadline = datetime.strptime(health_goal2_deadline, '%m/%d/%Y')
                     break
+                
                 except ValueError:
                     health_goal2_deadline = input(f"Please enter a deadline in the format MM/DD/YYYY: ")
             answers[-1].append(
                 {'goal': health_goal2, 'deadline': deadline.date(), 'action': health_goal2_action, 'contact': health_goal2_contact, 'progress': []},
             )
-        elif category == 'Measuring progress':
-            for goal in answers[-2]:
-                goal_name = goal['goal']
-                goal_progress = []
-                for i in range(3):
-                    progress = input(f"What is your progress on {goal_name} for today? (Day {i+1}) ")
-                    goal_progress.append(progress)
-                goal['progress'].append({'date': datetime.now().date(), 'progress': goal_progress})
-            for goal in answers[-1]:
-                goal_name = goal['goal']
-                goal_progress = []
-                for i in range(3):
-                    progress = input(f"What is your progress on {goal_name} for today? (Day {i+1}) ")
-                    goal_progress.append(progress)
-                goal['progress'].append({'date': datetime.now().date(), 'progress': goal_progress})
+            health_goal3 = input("Enter your third health goal for this month: ")
+            health_goal3_deadline = input(f"When would you like to achieve {health_goal3}? (MM/DD/YYYY) ")
+            health_goal3_action = input(f"What action do you need to take to achieve {health_goal3}? ")
+            health_goal3_contact = input(f"Who is a good person to call before taking action on {health_goal3}? ")
+            while True:
+                try:
+                    deadline = datetime.strptime(health_goal3_deadline, '%m/%d/%Y')
+                    break
+                except ValueError:
+                    health_goal3_deadline = input(f"Please enter a deadline in the format MM/DD/YYYY: ")
+            answers[-1].append(
+                {'goal': health_goal3, 'deadline': deadline.date(), 'action': health_goal3_action, 'contact': health_goal3_contact, 'progress': []},
+            )
         else:
-            answer = input(f"3. {category}: ")
+            answer = input(f"4. {category}: ")
             answers.append(answer)
     return answers
 
